@@ -30,8 +30,9 @@ export default function Login() {
         password: data.password
 
       });
-      if(response.data.token){
-        history.push('/pokemons');
+      if(response.data.user){
+
+        history.push('/');
       }
       console.log(response)
     } catch (err) {

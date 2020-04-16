@@ -30,6 +30,7 @@ export default function Login() {
 
       });
       if(response.data.token){
+        localStorage.setItem('token', response.data.token)
         history.push('/pokemons');
       }
       console.log(response)
@@ -50,11 +51,11 @@ export default function Login() {
         <Input label="Email" name="email" type="email" placeholder="Email"/>
         <Input label="Password" name="password" type="password" placeholder="Senha"/>
         <Button type="submit" variant="contained" color="primary">Sign in</Button>
-        {/* <Button type="button" variant="contained" color="primary">
+        <Button type="button" variant="contained" color="primary">
           <Link to='/register'>
             Sign up
           </Link>
-        </Button> */}
+        </Button>
       </Form>
     </div>
     </>

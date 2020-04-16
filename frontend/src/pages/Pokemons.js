@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -23,13 +23,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
 function Pokemon() {
-  
+
   const [ pokemons, setPokemons ] = useState([]);
-  const [ pokemonsType, setPokemonsType ] = useState([]);
   const [ pagina, setPagina ] = useState('');
+  const [ anterior, setAnterior] = useState('');
+
   const [data, setData] = useState([]);
 
+
+const history = useHistory();
 
   const classes = useStyles();
   
@@ -63,8 +67,15 @@ function Pokemon() {
     data = await data.json();
     // console.log(data)
     setPagina(data.next)
+    setAnterior(data.previous);
     setPokemons([...data.results]);
   } 
+
+  function sair() {
+    localStorage.setItem('token', '')
+ 
+    history.push('/');
+  }
   return (
     <>
       <div className="cabecalho">
@@ -80,6 +91,9 @@ function Pokemon() {
       </div>
 
       <div className="botoes">
+      <Button variant="contained" color="primary">
+          <a onClick={() => next(anterior)}>Anterior</a>
+        </Button>
         <Button variant="contained" color="primary">
           <a onClick={() => next(pagina)}>Próxima</a>
         </Button>
@@ -88,6 +102,9 @@ function Pokemon() {
           <Link to="/tipos">
             Tipos
           </Link>
+        </Button>
+        <Button variant="contained" color="secondary" onClick={()=> sair()}>
+            Sair
         </Button>
       </div>
       
