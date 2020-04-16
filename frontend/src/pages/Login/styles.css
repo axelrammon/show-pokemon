@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  padding: 10px;
+  /* border-radius: 5px; */
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid #2980b3;
+  outline: none;
+}
